@@ -4,6 +4,7 @@ import { FetchApiDataService } from '../fetch-api-data.service'
 import { GenreComponent } from '../genre/genre.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
 
+
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -11,6 +12,7 @@ import { SynopsisComponent } from '../synopsis/synopsis.component';
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
+  FavoriteMovies: any[] = [];
   dialog: any;
   constructor(public fetchApiData: FetchApiDataService) { }
 
@@ -24,6 +26,17 @@ export class MovieCardComponent implements OnInit {
       return this.movies;
     });
   }
+
+    /**
+   * get an array of the user's favorite movies from user's data
+   */
+     getFavoriteMovies(): void {
+      const user = localStorage.getItem('user');
+      this.fetchApiData.getUser(user).subscribe((resp: any) => {
+        this.FavoriteMovies = resp.FavoriteMovies;
+        console.log(this.FavoriteMovies);
+      });
+    }
    /**
    *open a dialog to display the GenreCardComponent
    * @param name {string}
