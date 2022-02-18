@@ -3,7 +3,7 @@ import { DirectorComponent } from '../director/director.component';
 import { FetchApiDataService } from '../fetch-api-data.service'
 import { GenreComponent } from '../genre/genre.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
-
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 @Component({
   selector: 'app-movie-card',
