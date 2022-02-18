@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FetchApiDataService } from '../fetch-api-data.service';
+import { FetchApiDataService, User } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { GenreComponent } from '../genre/genre.component';
 import { DirectorComponent } from '../director/director.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
-import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { NavigateComponent } from '../navigate/navigate.component';
+import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -101,7 +101,7 @@ export class UserProfileComponent implements OnInit {
    * open a dialog to edit the user profile
    * @module EditProfileFormComponent
    */
-  openEditProfileFormDialog(): void {
+  openEditProfileDialog(): void {
     this.dialog.open(EditProfileComponent, {
       width: '280px',
     });
