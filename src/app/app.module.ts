@@ -20,7 +20,7 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 import { GenreComponent } from './genre/genre.component';
@@ -32,8 +32,8 @@ import { NavigationComponent } from './navigate/navigate.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
-  { path: 'movies', component: NavigationComponent },
-  { path: 'users', component: NavigationComponent },
+  { path: 'movies', component: MovieCardComponent },
+  { path: 'users', component: UserProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
@@ -64,6 +64,9 @@ const appRoutes: Routes = [
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatIconModule,
+    MatToolbarModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent],

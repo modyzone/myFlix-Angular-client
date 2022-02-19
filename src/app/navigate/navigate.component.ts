@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { FetchApiDataService } from '../fetch-api-data.service';
+import { UserProfile } from 'console';
+
 
 @Component({
   selector: 'app-navigation',
@@ -8,20 +13,36 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigate.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  constructor(public snackBar: MatSnackBar, public router: Router) {}
+  constructor(
+    public snackBar: MatSnackBar,
+    public router: Router,
+    public dialog: MatDialog
+  ) { }
+
+  ngOnInit(): void { }
 
   /**
-   * log out the current user and clear the localstorage. Then locates to 'welcome page'
+* Routes user to movies page
+*/
+  goToMoviesPage(): void {
+    this.router.navigate(['movies']);
+  }
+  /**
+  * Routes user to profile page
+  */
+  goToUserProfile(): void {
+    this.router.navigate(['profile']);
+  }
+  /**
+   * Logs a user out, clears the localStorage
+   * Re-routes to the welcome page
    */
-  userLogout(): void {
+  logout(): void {
     localStorage.clear();
-    this.snackBar.open('You successfully logged out!', 'OK', {
-      duration: 2000,
-    });
-    this.router.navigate(['/welcome']).then(() => {
+    this.router.navigate(['welcome']).then(() => {
       window.location.reload();
     });
   }
 
-  ngOnInit(): void {}
+
 }
