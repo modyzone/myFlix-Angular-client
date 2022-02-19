@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
+import {  OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
-import { UserProfile } from 'console';
+
 
 
 @Component({
@@ -14,35 +14,36 @@ import { UserProfile } from 'console';
 })
 export class NavigationComponent implements OnInit {
   constructor(
-    public snackBar: MatSnackBar,
+    public fetchApiData: FetchApiDataService,
+    public snackBar: MatSnackBar, 
     public router: Router,
     public dialog: MatDialog
-  ) { }
+    ) {}
 
-  ngOnInit(): void { }
+    ngOnInit(): void {}
 
-  /**
-* Routes user to movies page
-*/
+      /**
+   * Routes user to movies page
+   */
   goToMoviesPage(): void {
     this.router.navigate(['movies']);
   }
-  /**
-  * Routes user to profile page
-  */
-  goToUserProfile(): void {
-    this.router.navigate(['profile']);
-  }
+   /**
+   * Routes user to profile page
+   */
+    goToProfilePage(): void {
+      this.router.navigate(['users']);
+    }
   /**
    * Logs a user out, clears the localStorage
    * Re-routes to the welcome page
    */
-  logout(): void {
+   logout(): void {
     localStorage.clear();
     this.router.navigate(['welcome']).then(() => {
       window.location.reload();
     });
   }
 
-
+  
 }

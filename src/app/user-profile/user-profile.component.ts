@@ -95,15 +95,7 @@ export class UserProfileComponent implements OnInit {
     });
     this.router.navigate(['welcome']);
   }
-  /**
- * open a dialog to edit the user profile
- * @module EditProfileFormComponent
- */
-  openEditProfileFormDialog(): void {
-    this.dialog.open(EditProfileFormComponent, {
-      width: '280px',
-    });
-  }
+ 
 
   /**
    * open a dialog to edit the user profile
