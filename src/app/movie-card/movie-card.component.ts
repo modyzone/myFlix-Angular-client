@@ -27,16 +27,7 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-    /**
-   * get an array of the user's favorite movies from user's data
-   */
-     getFavoriteMovies(): void {
-      const user = localStorage.getItem('user');
-      this.fetchApiData.getUser(user).subscribe((resp: any) => {
-        this.FavoriteMovies = resp.FavoriteMovies;
-        console.log(this.FavoriteMovies);
-      });
-    }
+  
    /**
    *open a dialog to display the GenreCardComponent
    * @param name {string}
@@ -78,6 +69,24 @@ export class MovieCardComponent implements OnInit {
       data: { title: title, description: description },
       width: '300px',
     });
+  }
+    /**
+   * get an array of the user's favorite movies from user's data
+   */
+     getFavoriteMovies(): void {
+      const user = localStorage.getItem('user');
+      this.fetchApiData.getUser(user).subscribe((resp: any) => {
+        this.FavoriteMovies = resp.FavoriteMovies;
+        console.log(this.FavoriteMovies);
+      });
+    }
+  /**
+   * check if the movie is the user's favorite?
+   * @param MovieID {string}
+   * @returns true or false
+   */
+   isFavorite(MovieID: string): boolean {
+    return this.FavoriteMovies.some((movie) => movie._id === MovieID);
   }
 
 }

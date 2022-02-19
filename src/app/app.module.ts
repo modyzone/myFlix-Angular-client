@@ -27,13 +27,13 @@ import { GenreComponent } from './genre/genre.component';
 import { DirectorComponent } from './director/director.component';
 import { SynopsisComponent } from './synopsis/synopsis.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { NavigateComponent } from './navigate/navigate.component';
+import { EditProfileFormComponent } from './edit-profile/edit-profile.component';
+import { NavigationComponent } from './navigate/navigate.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
-  { path: 'movies', component: MovieCardComponent },
-  { path: 'users', component: UserProfileComponent },
+  { path: 'movies', component: NavigationComponent },
+  { path: 'users', component: NavigationComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
@@ -48,8 +48,8 @@ const appRoutes: Routes = [
     DirectorComponent,
     SynopsisComponent,
     UserProfileComponent,
-    EditProfileComponent,
-    NavigateComponent,
+    EditProfileFormComponent,
+    NavigationComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
