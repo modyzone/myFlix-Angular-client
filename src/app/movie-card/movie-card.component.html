@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navigation></app-navigation>
 <div style="display: flex;">
   <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto; margin: 10px">
     <mat-card-header style="text-align: left;">
@@ -19,7 +19,8 @@
         Synopsis
       </button>
       <!-- Favorite icon -->
-      <button mat-icon-button (click)="isFavorite(movie)">
+       <!-- Favorite icon -->
+       <button mat-icon-button (click)="toggleFavorite(movie)">
         <mat-icon *ngIf="!isFavorite(movie._id)"> favorite_border </mat-icon>
         <mat-icon *ngIf="isFavorite(movie._id)"> favorite </mat-icon>
       </button>

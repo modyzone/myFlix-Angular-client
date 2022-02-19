@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FetchApiDataService, User } from '../fetch-api-data.service';
+import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { GenreComponent } from '../genre/genre.component';
 import { DirectorComponent } from '../director/director.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
-import { NavigateComponent } from '../navigate/navigate.component';
-import { EditProfileComponent } from '../edit-profile/edit-profile.component';
+import { EditProfileFormComponent } from '../edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -25,32 +24,32 @@ export class UserProfileComponent implements OnInit {
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     public router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getUserInfo();
     this.getFavoriteMovies();
   }
-   /**
-   * call API end-point to get the user's information
-   * @function getUser
-   * @param Username
-   * @return user's data in json format
-   */
-    getUserInfo(): void {
-      const user = localStorage.getItem('user');
-      if (user) {
-        this.fetchApiData.getUser(user).subscribe((resp: User) => {
-          this.user = resp;
-  
-          console.log(this.user);
-        });
-      }
+  /**
+  * call API end-point to get the user's information
+  * @function getUser
+  * @param Username
+  * @return user's data in json format
+  */
+  getUserInfo(): void {
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.fetchApiData.getUser(user).subscribe((resp: any) => {
+        this.user = resp;
+
+        console.log(this.user);
+      });
     }
-  
- /**
-   * get user's FavoriteMovies from the user's data
-   */
+  }
+
+  /**
+    * get user's FavoriteMovies from the user's data
+    */
   getFavoriteMovies(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
@@ -96,13 +95,22 @@ export class UserProfileComponent implements OnInit {
     });
     this.router.navigate(['welcome']);
   }
+  /**
+ * open a dialog to edit the user profile
+ * @module EditProfileFormComponent
+ */
+  openEditProfileFormDialog(): void {
+    this.dialog.open(EditProfileFormComponent, {
+      width: '280px',
+    });
+  }
 
   /**
    * open a dialog to edit the user profile
    * @module EditProfileFormComponent
    */
   openEditProfileDialog(): void {
-    this.dialog.open(EditProfileComponent, {
+    this.dialog.open(EditProfileFormComponent, {
       width: '280px',
     });
   }
