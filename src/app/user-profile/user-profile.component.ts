@@ -3,21 +3,20 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { EditProfileFormComponent } from '../edit-profile/edit-profile.component';
 import { GenreComponent } from '../genre/genre.component';
 import { DirectorComponent } from '../director/director.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
-import { EditProfileFormComponent } from '../edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
   user: any = {};
   fav: any = null;
   Username = localStorage.getItem('user');
-  
 
   FavMovies: any[] = [];
 
@@ -26,38 +25,27 @@ export class UserProfileComponent implements OnInit {
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     public router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getUserInfo();
-    this.addFavoriteMovies();
-    this.getUser();
+    this.getFavoriteMovies();
   }
 
   /**
-   * Gets user info from backend
+   * call API end-point to get the user's information
+   * @function getUser
+   * @param Username
+   * @return user's data in json format
    */
-   getUser(): void {
-    this.fetchApiData.getUser(this.Username).subscribe((resp: any) => {
-      this.user = resp;
-      this.fav = resp.Favorites;
-      console.log(this.user)
-      return (this.user, this.fav);
-    });
-  }
-
-
-  /**
-  * call API end-point to get the user's information
-  * @function getUser
-  * @param Username
-  * @return user's data in json format
-  */
   getUserInfo(): void {
     const user = localStorage.getItem('user');
     if (user) {
       this.fetchApiData.getUser(user).subscribe((resp: any) => {
         this.user = resp;
+        this.fav = resp.Favorites;
+      console.log(this.user)
+      return (this.user, this.fav);
 
         console.log(this.user);
       });
@@ -65,9 +53,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   /**
-    * get user's FavoriteMovies from the user's data
-    */
-  addFavoriteMovies(): void {
+   * get user's FavoriteMovies from the user's data
+   */
+  getFavoriteMovies(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
       this.FavMovies = resp.FavoriteMovies;
@@ -83,7 +71,7 @@ export class UserProfileComponent implements OnInit {
    * @param title {string}
    * @returns updated user's data in json format
    */
-   deleteFavoriteMovie(MovieId: string, title: string): void {
+  removeFavoriteMovie(MovieId: string, title: string): void {
     this.fetchApiData.deleteFavoriteMovie(MovieId).subscribe((resp: any) => {
       console.log(resp);
       this.snackBar.open(
@@ -112,13 +100,12 @@ export class UserProfileComponent implements OnInit {
     });
     this.router.navigate(['welcome']);
   }
- 
 
   /**
    * open a dialog to edit the user profile
    * @module EditProfileFormComponent
    */
-  openEditProfileDialog(): void {
+  openEditProfileFormDialog(): void {
     this.dialog.open(EditProfileFormComponent, {
       width: '280px',
     });

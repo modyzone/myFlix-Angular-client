@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-synopsis',
+  selector: 'app-synopsis-card',
   templateUrl: './synopsis.component.html',
-  styleUrls: ['./synopsis.component.scss']
+  styleUrls: ['./synopsis.component.scss'],
 })
 export class SynopsisComponent implements OnInit {
+  /**
+   *
+   * @param data
+   */
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { title: string; description: string }
+  ) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

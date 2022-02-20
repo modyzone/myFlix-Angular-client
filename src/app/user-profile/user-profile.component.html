@@ -14,7 +14,7 @@
       <button 
         class='profile-btn' 
         mat-raised-button 
-        (click)="openEditProfileDialog()"
+        (click)="openEditProfileFormDialog()"
         style='margin-right: 10px;' color="primary">
         Edit Profile
       </button>
@@ -39,7 +39,7 @@
       <mat-card-actions>
         <mat-icon class="fav-icon" 
         class='profile-btn' 
-        (click)="addFavoriteMovies();"
+        (click)="getFavoriteMovies();"
         style='margin-right: 10px;'
         color="primary"
         >
@@ -49,7 +49,7 @@
       <mat-card-actions>
         <mat-icon class="fav-icon" 
         class='profile-btn' 
-        (click)="deleteFavoriteMovie(movie._id, movie.ImagePath);"
+        (click)="removeFavoriteMovie(movie._id, movie.ImagePath);"
         style='margin-right: 10px;'
         color="primary"
         >
