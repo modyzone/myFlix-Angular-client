@@ -25,26 +25,31 @@
   </mat-card>
 </div>
 <div style="display: flex;">
-  <div *ngFor="let movie of favs" style="display: flex; margin: 15px;">
+  <div *ngFor="let movie of fav" style="display: flex; margin: 15px;">
     <mat-card>
       <mat-card-header style="text-align: left;">
         <mat-card-title>{{movie.Title}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <img src={{movie.ImagePath}} alt={{movie.Title}} style='height: 325px;' />
-      <button mat-button color='primary' (click)='openSynopsisDialog(movie.Title, movie.ImagePath, movie.Description)'>
+      <button mat-button color='primary' (click)='openSynopsisDialog(movie.Title, movie.ImagePath)'>
         Synopsis
       </button>
       </mat-card-content>
       <mat-card-actions>
         <mat-icon class="fav-icon" 
         class='profile-btn' 
-        (click)="deleteFavoriteMovie(movie._id)"
-        style='margin-right: 10px;'>
+        (click)="addFavoriteMovies();"
+        style='margin-right: 10px;'
+        color="primary"
+        >
+        favorite
       </mat-icon>
-      <mat-icon class="fav-icon" 
+      </mat-card-actions>
+      <mat-card-actions>
+        <mat-icon class="fav-icon" 
         class='profile-btn' 
-        (click)="removeFav(movie._id)"
+        (click)="deleteFavoriteMovie(movie._id, movie.ImagePath);"
         style='margin-right: 10px;'
         color="primary"
         >

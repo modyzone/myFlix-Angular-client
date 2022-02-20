@@ -15,7 +15,9 @@ import { EditProfileFormComponent } from '../edit-profile/edit-profile.component
 })
 export class UserProfileComponent implements OnInit {
   user: any = {};
+  fav: any = null;
   Username = localStorage.getItem('user');
+  
 
   FavMovies: any[] = [];
 
@@ -28,8 +30,23 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserInfo();
-    this.getFavoriteMovies();
+    this.addFavoriteMovies();
+    this.getUser();
   }
+
+  /**
+   * Gets user info from backend
+   */
+   getUser(): void {
+    this.fetchApiData.getUser(this.Username).subscribe((resp: any) => {
+      this.user = resp;
+      this.fav = resp.Favorites;
+      console.log(this.user)
+      return (this.user, this.fav);
+    });
+  }
+
+
   /**
   * call API end-point to get the user's information
   * @function getUser
@@ -50,7 +67,7 @@ export class UserProfileComponent implements OnInit {
   /**
     * get user's FavoriteMovies from the user's data
     */
-  getFavoriteMovies(): void {
+  addFavoriteMovies(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
       this.FavMovies = resp.FavoriteMovies;
@@ -66,7 +83,7 @@ export class UserProfileComponent implements OnInit {
    * @param title {string}
    * @returns updated user's data in json format
    */
-  removeFavoriteMovie(MovieId: string, title: string): void {
+   deleteFavoriteMovie(MovieId: string, title: string): void {
     this.fetchApiData.deleteFavoriteMovie(MovieId).subscribe((resp: any) => {
       console.log(resp);
       this.snackBar.open(
