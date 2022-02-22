@@ -155,9 +155,10 @@ export class FetchApiDataService {
    */
   addFavoriteMovie(MovieID: any): Observable<any> {
     const token = localStorage.getItem('token');
-    const Username = localStorage.getItem('user');
+    const user = localStorage.getItem('user') || '{}';
+    const userObject = JSON.parse(user);
     return this.http
-      .put(apiUrl + '/users/' + Username + '/movies/' + MovieID, null, {
+      .post(apiUrl + '/users/' + userObject.Username + '/movies/' + MovieID, null, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -204,10 +205,11 @@ export class FetchApiDataService {
    * @returns updated user's information after removed a movie from the list in json format
    */
   deleteFavoriteMovie(MovieID: any): Observable<any> {
-    const Username = localStorage.getItem('user');
+    const user = localStorage.getItem('user') || '{}';
+    const userObject = JSON.parse(user);
     const token = localStorage.getItem('token');
     return this.http
-      .delete(apiUrl + '/users/' + Username + '/movies/' + MovieID, {
+      .delete(apiUrl + '/users/' + userObject.Username + '/movies/' + MovieID, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
